@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Spotify API</title>
+        <title>Dog API</title>
         <meta charset = "utf-8"/>
         <script>
             function getData() {
 
-                request = new XMLHttpRequest();
+                const request = new XMLHttpRequest();
+
                 console.log("1 - request object created");
      
-                request.open("GET", "https://api.spotify.com", true);
+                request.open("GET", "https://dog.ceo/api/breeds/image/random", true);
 
                 console.log("2 - opened request file");
 
@@ -19,8 +20,10 @@
                     if (request.readyState == 4 && request.status == 200) {
 
                         result = request.responseText;
-                        alert(result)
-                        weather = JSON.parse(result);
+                        document.getElementById("raw").innerHTML = result;
+                        //alert(result)
+                        dog = JSON.parse(result);
+                        document.getElementById("pretty").src = dog.message;
                     }
                 }
 
@@ -30,6 +33,27 @@
 
         </script>
     </head>
-    <body onload = "getData()">
+    <body onload = "getData()" style = "text-align: center; padding: 3%; font-family: sans-serif">
+        <h1>Assignment 10: API Practice</h1>
+        <h2>By Rebecca Miller</h2>
+        <h3>Random Dog Generator</h3>
+        <h4>Disclaimer: Does Not Actually Generate Dogs</h4>
+        <h5>(Which is fine because I don't even like dogs anyway)</h5>
+        <h6>Shhhh....</h6>
+        
+        <div style = "height: 2em;"></div>
+
+        <h2>Raw Data</h2>
+        <p id = "raw">Loading raw data...</p>
+
+        <div style = "height: 2em;"></div>
+
+        <h2>Pretty Data</h2>
+        <img id = "pretty"/>
+
+        <p>I used a public API called Dog API that, upon call, generates a random picture of a dog. Or more accurately, a link to a random picture of a dog. </p>
+        <p>The API itself can be found on <a href = "https://dog.ceo/dog-api/">https://dog.ceo/dog-api/</a> and I found this in the first place through <a href = "https://flaviocopes.com/sample-app-ideas/">https://flaviocopes.com/sample-app-ideas/</a> which was the site with lots of web app ideas provided for our final project.</p>
+        <p>The options used for this API request were "GET" since I was retrieving information from the API, the URL "https://dog.ceo/api/breeds/image/random" which is provided on the site, and true.</p>
+        <p>This API could be helpful more practically for a website for something like an animal shelter, which perhaps doesn't have the resources to professionally photograph its own dogs, so it could use something like this to retrieve high quality photos of animals without worrying about copyright issues. This API could also be used, less seriously, to cheer a friend up if you're too busy to search up photos yourself, since this hands them to you.</p>
     </body>
 </html>
